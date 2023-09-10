@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useRef} from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    let num1 = useRef<HTMLInputElement>(null)
+    let num2 = useRef<HTMLInputElement>(null)
+    let numRage1 = useRef<HTMLInputElement>(null)
+    let numRage2 = useRef<HTMLInputElement>(null)
+    let numRage3 = useRef<HTMLInputElement>(null)
+
+    // let []
+
+    let submitClick = () => {
+
+    }
+
+    return (
+        <div className="App">
+            <div>
+                <div>
+                    <span>ta:</span>
+                    <input ref={num1} type="number"></input>
+                </div>
+
+                <div>
+                    <span>tb:</span>
+                    <input ref={num2} type="number"></input>
+                </div>
+
+                <div>
+                    <span>Возможеные tc, td, te:</span>
+                    <input ref={numRage1} type="number"></input>
+                    <input ref={numRage2} type="number"></input>
+                    <input ref={numRage3} type="number"></input>
+                </div>
+            </div>
+            <button onClick={submitClick}>Расчитать</button>
+        </div>
+
+
+    );
 }
 
 export default App;
