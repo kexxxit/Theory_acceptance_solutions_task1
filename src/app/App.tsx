@@ -8,6 +8,7 @@ const App: React.FC = () => {
     const numRange1 = useRef<HTMLInputElement>(null)
     const numRange2 = useRef<HTMLInputElement>(null)
     const numRange3 = useRef<HTMLInputElement>(null)
+    const reserve = useRef<HTMLInputElement>(null)
 
     const [isTableVisible, setIsTableVisible] = useState<boolean>(false)
 
@@ -56,6 +57,10 @@ const App: React.FC = () => {
                     <input ref={numRange1} type="number"></input>
                     <input ref={numRange2} type="number"></input>
                     <input ref={numRange3} type="number"></input>
+                </div>
+                <div>
+                    <span>Резерв (ускоряет строительство на год):</span>
+                    <input ref={reserve} type="number"/>
                 </div>
             </div>
             <button onClick={onSubmitClick}>Расчитать</button>

@@ -1,7 +1,13 @@
 .table_visible {
-    display: block;
+    display: table;
 }
 
 .table_hidden {
     display: none;
+}
+
+.table_input {
+    border: 0;
+    height: 100%;
+    outline: none;
 }
