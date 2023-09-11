@@ -1,0 +1,7 @@
+.table_visible {
+    display: block;
+}
+
+.table_hidden {
+    display: none;
+}
