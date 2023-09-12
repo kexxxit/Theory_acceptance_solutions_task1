@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import '../App.css';
-import Table from "../components/Table/Table";
+import ProfitTable from "../components/ProfitTable/ProfitTable";
+import ProfitWithReserveTable from "../components/ProfitWithReserveTable/ProfitWithReserveTable";
 
 const App: React.FC = () => {
     const num1 = useRef<HTMLInputElement>(null)
@@ -11,9 +12,12 @@ const App: React.FC = () => {
     const reserve = useRef<HTMLInputElement>(null)
 
     const [isTableVisible, setIsTableVisible] = useState<boolean>(false)
+    const [isTableWithReserveVisible, setIsTableWithReserveVisible] = useState<boolean>(false)
 
     const [yearsArray, setYearsArray] = useState<number[]>([])
     const [uniqYearsArray, setUniqYearsArray] = useState<number[]>([])
+
+    const [profitArray, setProfitArray] = useState<number[]>([])
 
     const onSubmitClick = () => {
         let years: number[] = []
@@ -39,6 +43,12 @@ const App: React.FC = () => {
         setUniqYearsArray(yearsArray.filter((elem, i) => i === yearsArray.indexOf(elem)))
     },[yearsArray])
 
+    useEffect(() => {
+        if (profitArray.length !== 0) {
+            setIsTableWithReserveVisible(true)
+        }
+    }, [profitArray])
+
     return (
         <div className="App">
             <div>
@@ -53,18 +63,19 @@ const App: React.FC = () => {
                 </div>
 
                 <div>
-                    <span>Наем рабочей силы, монтаж оборудования и отладка модели изделия могут занять:</span>
+                    <span>Наем рабочей силы, монтаж оборудования и отладка модели изделия могут занять: </span>
                     <input ref={numRange1} type="number"></input>
                     <input ref={numRange2} type="number"></input>
                     <input ref={numRange3} type="number"></input>
                 </div>
                 <div>
-                    <span>Резерв (ускоряет строительство на год):</span>
+                    <span>Резерв (ускоряет строительство на год): </span>
                     <input ref={reserve} type="number"/>
                 </div>
             </div>
             <button onClick={onSubmitClick}>Расчитать</button>
-            <Table isVisible={isTableVisible} years={uniqYearsArray}/>
+            <ProfitTable isVisible={isTableVisible} years={uniqYearsArray} setProfitArray={setProfitArray} />
+            <ProfitWithReserveTable isVisible={isTableWithReserveVisible} possibleYears={uniqYearsArray} profitArray={profitArray} reserve={Number(reserve.current?.value)}/>
         </div>
     );
 };

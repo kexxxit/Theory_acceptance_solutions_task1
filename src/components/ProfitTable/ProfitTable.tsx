@@ -1,17 +1,19 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {TableProps} from "../../utils/types";
 import styles from "./Table.module.css";
 
-const Table: React.FC<TableProps> = (props) => {
+const ProfitTable: React.FC<TableProps> = (props) => {
 
     const inputsRef = useRef<HTMLInputElement[]>([])
 
     const onChangeInput = () => {
+        let profitArray: number[] = []
         inputsRef.current.forEach((inputRef) => {
-            console.log(inputRef.value)
+            profitArray.push(Number(inputRef.value))
         })
-        console.log(inputsRef)
-        console.log(cellsInput)
+        if (!profitArray.slice(0, profitArray.length - 1).includes(0)) {
+            props.setProfitArray(profitArray)
+        }
     }
 
     const addInputRef = (ref: HTMLInputElement | null) => {
@@ -42,4 +44,4 @@ const Table: React.FC<TableProps> = (props) => {
     </table>
 }
 
-export default Table
+export default ProfitTable
