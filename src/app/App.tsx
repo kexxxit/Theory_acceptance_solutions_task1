@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import '../App.css';
 import ProfitTable from "../components/ProfitTable/ProfitTable";
 import ProfitWithReserveTable from "../components/ProfitWithReserveTable/ProfitWithReserveTable";
+import ReserveGrade from "../components/ReserveGrade/ReserveGrade";
 
 const App: React.FC = () => {
     const num1 = useRef<HTMLInputElement>(null)
@@ -76,6 +77,7 @@ const App: React.FC = () => {
             <button onClick={onSubmitClick}>Расчитать</button>
             <ProfitTable isVisible={isTableVisible} years={uniqYearsArray} setProfitArray={setProfitArray} />
             <ProfitWithReserveTable isVisible={isTableWithReserveVisible} possibleYears={uniqYearsArray} profitArray={profitArray} reserve={Number(reserve.current?.value)}/>
+            <ReserveGrade years={yearsArray} uniqYears={uniqYearsArray} profits={profitArray}/>
         </div>
     );
 };

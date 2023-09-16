@@ -12,3 +12,9 @@ export type TableWithReserveProps = {
     isVisible: boolean
     reserve: number
 }
+
+export type ReserveGradeProps = {
+    years: number[]
+    uniqYears: number[]
+    profits: number[]
+}
