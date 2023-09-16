@@ -4,6 +4,7 @@ export type TableProps = {
     years: number[]
     isVisible: boolean
     setProfitArray:  React.Dispatch<React.SetStateAction<number[]>>
+    setIsResultsVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export type TableWithReserveProps = {
@@ -17,4 +18,6 @@ export type ReserveGradeProps = {
     years: number[]
     uniqYears: number[]
     profits: number[]
+    reserve: number
+    isResultsVisible: boolean
 }

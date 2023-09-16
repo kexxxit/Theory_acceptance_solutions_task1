@@ -13,13 +13,13 @@ const ProfitTable: React.FC<TableProps> = (props) => {
         })
         if (!profitArray.slice(0, profitArray.length - 1).includes(0)) {
             props.setProfitArray(profitArray)
+            props.setIsResultsVisible(true)
         }
     }
 
     const addInputRef = (ref: HTMLInputElement | null) => {
         if (ref) {
             inputsRef.current.push(ref)
-            console.log(ref)
         }
     }
 
@@ -39,7 +39,7 @@ const ProfitTable: React.FC<TableProps> = (props) => {
         <tr>
             <td><input className={styles.table_input} onChange={onChangeInput} ref={(ref)=> addInputRef(ref)} type={"number"}/></td>
             {cellsInput}
-            <td><input className={styles.table_input} onChange={onChangeInput} ref={(ref)=> addInputRef(ref)} type={"number"}/></td>
+            <td><input value={0} className={styles.table_input} onChange={onChangeInput} ref={(ref)=> addInputRef(ref)} type={"number"}/></td>
         </tr>
     </table>
 }

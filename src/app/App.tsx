@@ -14,6 +14,7 @@ const App: React.FC = () => {
 
     const [isTableVisible, setIsTableVisible] = useState<boolean>(false)
     const [isTableWithReserveVisible, setIsTableWithReserveVisible] = useState<boolean>(false)
+    const [isResultsVisible, setIsResultsVisible] = useState<boolean>(false)
 
     const [yearsArray, setYearsArray] = useState<number[]>([])
     const [uniqYearsArray, setUniqYearsArray] = useState<number[]>([])
@@ -21,27 +22,29 @@ const App: React.FC = () => {
     const [profitArray, setProfitArray] = useState<number[]>([])
 
     const onSubmitClick = () => {
+        const minYear = Math.min(Number(numRange1.current?.value), Number(numRange2.current?.value), Number(numRange3.current?.value))
+        const maxYear = Math.max(Number(numRange1.current?.value), Number(numRange2.current?.value), Number(numRange3.current?.value))
+
         let years: number[] = []
-        for (let i = Number(numRange1.current?.value); i<= Number(numRange3.current?.value); i++) {
-            for (let j = Number(numRange1.current?.value); j<= Number(numRange3.current?.value); j++) {
-                for (let k = Number(numRange1.current?.value); k<= Number(numRange3.current?.value); k++) {
-                    let years1 = Number(num1.current?.value) + j
-                    let years2 = Number(num2.current?.value) + k
-                    let years3 = i
+        for (let i = minYear; i<= maxYear; i++) {
+            for (let j = minYear; j<= maxYear; j++) {
+                for (let k = minYear; k<= maxYear; k++) {
+                    const years1 = Number(num1.current?.value) + j
+                    const years2 = Number(num2.current?.value) + k
+                    const years3 = i
 
                     years.push(Math.max(years1,years2,years3))
                 }
             }
         }
-        setYearsArray(years)
+        setYearsArray(years.sort())
     }
 
     useEffect(() => {
-        console.log(yearsArray)
         if (yearsArray.length !== 0) {
             setIsTableVisible(true)
         }
-        setUniqYearsArray(yearsArray.filter((elem, i) => i === yearsArray.indexOf(elem)))
+        setUniqYearsArray(yearsArray.filter((elem, index) => index === yearsArray.indexOf(elem)))
     },[yearsArray])
 
     useEffect(() => {
@@ -75,9 +78,9 @@ const App: React.FC = () => {
                 </div>
             </div>
             <button onClick={onSubmitClick}>Расчитать</button>
-            <ProfitTable isVisible={isTableVisible} years={uniqYearsArray} setProfitArray={setProfitArray} />
+            <ProfitTable isVisible={isTableVisible} years={uniqYearsArray} setProfitArray={setProfitArray} setIsResultsVisible={setIsResultsVisible} />
             <ProfitWithReserveTable isVisible={isTableWithReserveVisible} possibleYears={uniqYearsArray} profitArray={profitArray} reserve={Number(reserve.current?.value)}/>
-            <ReserveGrade years={yearsArray} uniqYears={uniqYearsArray} profits={profitArray}/>
+            <ReserveGrade years={yearsArray} uniqYears={uniqYearsArray} profits={profitArray} reserve={Number(reserve.current?.value)} isResultsVisible={isResultsVisible}/>
         </div>
     );
 };

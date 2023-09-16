@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import {TableWithReserveProps} from "../../utils/types";
 import styles from "./ProfitWithReserveTable.module.css";
 
