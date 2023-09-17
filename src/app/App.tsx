@@ -25,7 +25,7 @@ const App: React.FC = () => {
         const minYear = Math.min(Number(numRange1.current?.value), Number(numRange2.current?.value), Number(numRange3.current?.value))
         const maxYear = Math.max(Number(numRange1.current?.value), Number(numRange2.current?.value), Number(numRange3.current?.value))
 
-        let years: number[] = []
+        setYearsArray([])
         for (let i = minYear; i<= maxYear; i++) {
             for (let j = minYear; j<= maxYear; j++) {
                 for (let k = minYear; k<= maxYear; k++) {
@@ -33,11 +33,11 @@ const App: React.FC = () => {
                     const years2 = Number(num2.current?.value) + k
                     const years3 = i
 
-                    years.push(Math.max(years1,years2,years3))
+                    setYearsArray(prevState => [...prevState, Math.max(years1,years2,years3)])
                 }
             }
         }
-        setYearsArray(years.sort())
+
     }
 
     useEffect(() => {
