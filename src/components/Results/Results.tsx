@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {ReserveGradeProps} from "../../utils/types";
 import styles from "./Results.module.css";
 
-const ReserveGrade: React.FC<ReserveGradeProps> = (props) => {
+const Results: React.FC<ReserveGradeProps> = (props) => {
     const [maxProbability, setMaxProbability] = useState<number>(0)
     const [maxProbabilityYear, setMaxProbabilityYear] = useState<number>(0)
     const [index, setIndex] = useState<number>(-1)
@@ -52,4 +52,4 @@ const ReserveGrade: React.FC<ReserveGradeProps> = (props) => {
     </div>
 }
 
-export default ReserveGrade
+export default Results

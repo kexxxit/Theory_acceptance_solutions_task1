@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import '../App.css';
 import ProfitTable from "../components/ProfitTable/ProfitTable";
 import ProfitWithReserveTable from "../components/ProfitWithReserveTable/ProfitWithReserveTable";
-import ReserveGrade from "../components/ReserveGrade/ReserveGrade";
+import Results from "../components/Results/Results";
 
 const App: React.FC = () => {
     const num1 = useRef<HTMLInputElement>(null)
@@ -18,10 +18,17 @@ const App: React.FC = () => {
 
     const [yearsArray, setYearsArray] = useState<number[]>([])
     const [uniqYearsArray, setUniqYearsArray] = useState<number[]>([])
-
     const [profitArray, setProfitArray] = useState<number[]>([])
 
     const onSubmitClick = () => {
+
+        setIsTableVisible(false)
+        setIsResultsVisible(false)
+        setIsTableWithReserveVisible(false)
+        setYearsArray([])
+        setProfitArray([])
+        setUniqYearsArray([])
+
         const minYear = Math.min(Number(numRange1.current?.value), Number(numRange2.current?.value), Number(numRange3.current?.value))
         const maxYear = Math.max(Number(numRange1.current?.value), Number(numRange2.current?.value), Number(numRange3.current?.value))
 
@@ -80,7 +87,7 @@ const App: React.FC = () => {
             <button onClick={onSubmitClick}>Расчитать</button>
             <ProfitTable isVisible={isTableVisible} years={uniqYearsArray} setProfitArray={setProfitArray} setIsResultsVisible={setIsResultsVisible} />
             <ProfitWithReserveTable isVisible={isTableWithReserveVisible} possibleYears={uniqYearsArray} profitArray={profitArray} reserve={Number(reserve.current?.value)}/>
-            <ReserveGrade years={yearsArray} uniqYears={uniqYearsArray} profits={profitArray} reserve={Number(reserve.current?.value)} isResultsVisible={isResultsVisible}/>
+            <Results years={yearsArray} uniqYears={uniqYearsArray} profits={profitArray} reserve={Number(reserve.current?.value)} isResultsVisible={isResultsVisible}/>
         </div>
     );
 };
